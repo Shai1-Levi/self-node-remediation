@@ -25,6 +25,6 @@ LABEL com.redhat.component="self-node-remediation--operator-container" \
       upstream_commit="${CI_POISON_PILL_UPSTREAM_COMMIT}" \
       summary="OpenShift Self Node Remediation" \
       io.k8s.display-name="OpenShift Self Node Remediation" \
-      maintainer="Dragonfly Team <kni-lifecycle-team@redhat.com>" \
+      maintainer="Dragonfly Team <team-dragonfly@redhat.com>" \
       description="OpenShift Self Node Remediation which is an OLM installable operator that install the Self Node Remediation agent"
 

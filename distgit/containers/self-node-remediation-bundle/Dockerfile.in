@@ -34,10 +34,13 @@ LABEL operators.operatorframework.io.bundle.channel.default.v1=stable
 # This last block are standard Red Hat container labels
 LABEL \
         com.redhat.component="self-node-remediation-operator-bundle-container" \
+        name="red-hat-workload-availability/self-node-remediation-bundle" \
         version="${CI_CONTAINER_VERSION}" \
-        name="self-node-remediation-bundle" \
+        summary="Self Node Remediation bundle" \
         License="ASL 2.0" \
-        io.k8s.display-name="self-node-remediation manager bundle" \
-        io.k8s.description="self-node-remediation manager bundle" \
-        summary="self-node-remediation manager bundle" \
-        maintainer="kni-lifecycle-team@redhat.com"
+        io.openshift.expose-services="" \
+        io.openshift.tags="rhwa,snr,remediation" \
+        io.k8s.display-name="Self Node Remediation bundle" \
+        io.k8s.description="Self Node Remediation bundle" \
+        maintainer="Dragonfly Team <team-dragonfly@redhat.com>" \
+        description="Self Node Remediation bundle" 

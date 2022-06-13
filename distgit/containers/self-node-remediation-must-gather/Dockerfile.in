@@ -9,10 +9,12 @@ RUN mv /usr/bin/gather{,_original} && \
 ENTRYPOINT /usr/bin/gather
 
 LABEL com.redhat.component="self-node-remediation-must-gather-container" \
-      name="openshift4/self-node-remediation-must-gather-rhel8" \
+      name="red-hat-workload-availability/self-node-remediation-must-gather-rhel8" \
       version="${CI_CONTAINER_VERSION}" \
       upstream_commit="${CI_MUST_GATHER_UPSTREAM_COMMIT}" \
-      summary="OpenShift Self Node Remediation Must Gather" \
-      io.k8s.display-name="OpenShift Self Node Remediation Must Gather" \
-      maintainer="Dragonfly Team <kni-lifecycle-team@redhat.com>" \
-      description="OpenShift Self Node Remediation Must Gather is a tool that integrates which OCP must-gather utility to collect debug info related to Self Node Remediation"
+      summary="Self Node Remediation Must Gather image" \
+      io.openshift.expose-services="" \
+      io.openshift.tags="rhwa,lifecycle,node,maintenance,logs" \
+      io.k8s.display-name="Self Node Remediation Must Gather Imgae" \
+      maintainer="Dragonfly Team <team-dragonfly@redhat.com>" \
+      description="Self Node Remediation Must Gather is a tool that integrates which OCP must-gather utility to collect debug info related to Self Node Remediation"
