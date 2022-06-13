@@ -1,0 +1,8 @@
+git:
+- branch: release-0.3
+  commit: de4785733402efa869714988c3f1141bc98aae0e
+  url: https://github.com/medik8s/poison-pill.git
+- automerge: 'yes'
+  branch: release-0.2
+  commit: 8f9f25138cf57cfcae695e0dbdf9d3ddab04b27d
+  url: https://github.com/medik8s/must-gather.git

@@ -1,0 +1,5 @@
+[gerrit]
+host=code.engineering.redhat.com
+defaultbranch=rhaos-4.10-rhel-8
+project=poison-pill
+port=22

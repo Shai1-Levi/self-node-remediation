@@ -1,0 +1,8 @@
+remote_source:
+  repo: ${CI_MUST_GATHER_UPSTREAM_URL}
+  ref: ${CI_MUST_GATHER_UPSTREAM_COMMIT}
+  pkg_managers: []
+image_build_method: imagebuilder
+platforms:
+  only:
+  - x86_64

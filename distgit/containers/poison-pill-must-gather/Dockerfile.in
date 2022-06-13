@@ -1,0 +1,18 @@
+#@follow_tag(registry-proxy.engineering.redhat.com/rh-osbs/openshift-ose-must-gather:v4.10)
+FROM registry-proxy.engineering.redhat.com/rh-osbs/openshift-ose-must-gather:v4.10.0-202205190747.p0.ge1c9bc4.assembly.stream
+
+COPY $REMOTE_SOURCE $REMOTE_SOURCE_DIR
+
+RUN mv /usr/bin/gather{,_original} && \
+    cp $REMOTE_SOURCE_DIR/app/collection-scripts/* /usr/bin
+
+ENTRYPOINT /usr/bin/gather
+
+LABEL com.redhat.component="poison-pill-must-gather-container" \
+      name="openshift4/poison-pill-must-gather-rhel8" \
+      version="${CI_CONTAINER_VERSION}" \
+      upstream_commit="${CI_MUST_GATHER_UPSTREAM_COMMIT}" \
+      summary="OpenShift Poison Pill Must Gather" \
+      io.k8s.display-name="OpenShift Poison Pill Must Gather" \
+      maintainer="Dragonfly Team <kni-lifecycle-team@redhat.com>" \
+      description="OpenShift Poison Pill Must Gather is a tool that integrates which OCP must-gather utility to collect debug info related to poison pill remediation"

@@ -1,0 +1,43 @@
+FROM scratch
+
+# Notice these COPY lines set up the only content.
+# Notice also that only *one* version of the operator is copied in.
+# This is different from how old appregistry delivery worked, where
+# you would copy in *all* versions of your operator.
+COPY manifests /manifests/
+COPY metadata/annotations.yaml /metadata/annotations.yaml
+
+# These are three labels needed to control how the pipeline should handle this container image
+# This first label tells the pipeline that this is a bundle image and should be
+# delivered via an index image
+LABEL com.redhat.delivery.operator.bundle=true
+
+# This second label tells the pipeline which versions of OpenShift the operator supports (4.5+).
+# This is used to control which index images should include this operator.
+LABEL com.redhat.openshift.versions="=v4.10"
+
+# This third label tells the pipeline that this operator should *also* be supported on OCP 4.4 and
+# earlier.  It is used to control whether or not the pipeline should attempt to automatically
+# backport this content into the old appregistry format and upload it to the quay.io application
+# registry endpoints.
+LABEL com.redhat.delivery.backport=false
+
+# The rest of these labels are copies of the same content in annotations.yaml and are needed by OLM
+# Note the package name and channels which are very important!
+LABEL operators.operatorframework.io.bundle.mediatype.v1=registry+v1
+LABEL operators.operatorframework.io.bundle.manifests.v1=manifests/
+LABEL operators.operatorframework.io.bundle.metadata.v1=metadata/
+LABEL operators.operatorframework.io.bundle.package.v1=poison-pill-manager
+LABEL operators.operatorframework.io.bundle.channels.v1=stable
+LABEL operators.operatorframework.io.bundle.channel.default.v1=stable
+
+# This last block are standard Red Hat container labels
+LABEL \
+        com.redhat.component="poison-pill-manager-operator-bundle-container" \
+        version="${CI_CONTAINER_VERSION}" \
+        name="poison-pill-manager-bundle" \
+        License="ASL 2.0" \
+        io.k8s.display-name="poison-pill manager bundle" \
+        io.k8s.description="poison-pill manager bundle" \
+        summary="poison-pill manager bundle" \
+        maintainer="kni-lifecycle-team@redhat.com"

@@ -1,0 +1,9 @@
+---
+project:
+  updaters:
+    - type: version-updater
+    - type: usrc
+    - type: decorated-dockerfile
+      lookup-registry: ""
+  build-source-generators:
+    - type: distgit-maker
