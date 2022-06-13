@@ -8,11 +8,11 @@ RUN mv /usr/bin/gather{,_original} && \
 
 ENTRYPOINT /usr/bin/gather
 
-LABEL com.redhat.component="poison-pill-must-gather-container" \
-      name="openshift4/poison-pill-must-gather-rhel8" \
+LABEL com.redhat.component="self-node-remediation-must-gather-container" \
+      name="openshift4/self-node-remediation-must-gather-rhel8" \
       version="${CI_CONTAINER_VERSION}" \
       upstream_commit="${CI_MUST_GATHER_UPSTREAM_COMMIT}" \
-      summary="OpenShift Poison Pill Must Gather" \
-      io.k8s.display-name="OpenShift Poison Pill Must Gather" \
+      summary="OpenShift Self Node Remediation Must Gather" \
+      io.k8s.display-name="OpenShift Self Node Remediation Must Gather" \
       maintainer="Dragonfly Team <kni-lifecycle-team@redhat.com>" \
-      description="OpenShift Poison Pill Must Gather is a tool that integrates which OCP must-gather utility to collect debug info related to poison pill remediation"
+      description="OpenShift Self Node Remediation Must Gather is a tool that integrates which OCP must-gather utility to collect debug info related to Self Node Remediation"

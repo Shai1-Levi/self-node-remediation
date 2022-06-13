@@ -19,12 +19,12 @@ ENTRYPOINT ["/manager"]
 
 USER ${USER_UID}
 
-LABEL com.redhat.component="poison-pill-manager-operator-container" \
-      name="openshift4/poison-pill-manager-rhel8-operator" \
+LABEL com.redhat.component="self-node-remediation--operator-container" \
+      name="openshift4/self-node-remediation--rhel8-operator" \
       version="${CI_CONTAINER_VERSION}" \
       upstream_commit="${CI_POISON_PILL_UPSTREAM_COMMIT}" \
-      summary="OpenShift Poison Pill Manager" \
-      io.k8s.display-name="OpenShift Poison Pill Manager" \
+      summary="OpenShift Self Node Remediation" \
+      io.k8s.display-name="OpenShift Self Node Remediation" \
       maintainer="Dragonfly Team <kni-lifecycle-team@redhat.com>" \
-      description="OpenShift Poison Pill Manager which is an OLM installable operator that install the poison pill agent"
+      description="OpenShift Self Node Remediation which is an OLM installable operator that install the Self Node Remediation agent"
 

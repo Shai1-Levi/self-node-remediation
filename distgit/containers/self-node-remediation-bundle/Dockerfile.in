@@ -27,17 +27,17 @@ LABEL com.redhat.delivery.backport=false
 LABEL operators.operatorframework.io.bundle.mediatype.v1=registry+v1
 LABEL operators.operatorframework.io.bundle.manifests.v1=manifests/
 LABEL operators.operatorframework.io.bundle.metadata.v1=metadata/
-LABEL operators.operatorframework.io.bundle.package.v1=poison-pill-manager
+LABEL operators.operatorframework.io.bundle.package.v1=self-node-remediation
 LABEL operators.operatorframework.io.bundle.channels.v1=stable
 LABEL operators.operatorframework.io.bundle.channel.default.v1=stable
 
 # This last block are standard Red Hat container labels
 LABEL \
-        com.redhat.component="poison-pill-manager-operator-bundle-container" \
+        com.redhat.component="self-node-remediation-operator-bundle-container" \
         version="${CI_CONTAINER_VERSION}" \
-        name="poison-pill-manager-bundle" \
+        name="self-node-remediation-bundle" \
         License="ASL 2.0" \
-        io.k8s.display-name="poison-pill manager bundle" \
-        io.k8s.description="poison-pill manager bundle" \
-        summary="poison-pill manager bundle" \
+        io.k8s.display-name="self-node-remediation manager bundle" \
+        io.k8s.description="self-node-remediation manager bundle" \
+        summary="self-node-remediation manager bundle" \
         maintainer="kni-lifecycle-team@redhat.com"
