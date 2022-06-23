@@ -1,6 +1,6 @@
 remote_source:
-  repo: ${CI_UPSTREAM_URL}
-  ref:  ${CI_UPSTREAM_COMMIT}
+  repo: ${CI_SELF_NODE_REMEDIATION_UPSTREAM_URL}
+  ref:  ${CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT}
   pkg_managers:
     - gomod
   flags:
@@ -18,4 +18,4 @@ operator_manifests:
   repo_replacements:
     - registry: registry-proxy.engineering.redhat.com
       package_mappings:
-        self-node-remediation-operator-container: openshift4/self-node-remediation-rhel8-operator
+        self-node-remediation-operator-container: workload-availability/self-node-remediation-rhel8-operator

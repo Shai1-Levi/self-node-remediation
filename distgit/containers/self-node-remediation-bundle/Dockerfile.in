@@ -4,8 +4,9 @@ FROM scratch
 # Notice also that only *one* version of the operator is copied in.
 # This is different from how old appregistry delivery worked, where
 # you would copy in *all* versions of your operator.
-COPY manifests /manifests/
-COPY metadata/annotations.yaml /metadata/annotations.yaml
+COPY bundle/manifests /manifests/
+COPY bundle/metadata /metadata/
+COPY bundle/tests /tests/
 
 # These are three labels needed to control how the pipeline should handle this container image
 # This first label tells the pipeline that this is a bundle image and should be
@@ -14,7 +15,7 @@ LABEL com.redhat.delivery.operator.bundle=true
 
 # This second label tells the pipeline which versions of OpenShift the operator supports (4.5+).
 # This is used to control which index images should include this operator.
-LABEL com.redhat.openshift.versions="=v4.10"
+LABEL com.redhat.openshift.versions="4.11"
 
 # This third label tells the pipeline that this operator should *also* be supported on OCP 4.4 and
 # earlier.  It is used to control whether or not the pipeline should attempt to automatically
@@ -36,6 +37,10 @@ LABEL \
         com.redhat.component="self-node-remediation-operator-bundle-container" \
         name="red-hat-workload-availability/self-node-remediation-bundle" \
         version="${CI_CONTAINER_VERSION}" \
+        release="${CI_CONTAINER_RELEASE}" \
+        upstream-version="${CI_SELF_NODE_REMEDIATION_UPSTREAM_VERSION}" \
+        upstream-vcs-ref="${CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT}" \
+        upstream-vcs-type="git" \
         summary="Self Node Remediation bundle" \
         License="ASL 2.0" \
         io.openshift.expose-services="" \

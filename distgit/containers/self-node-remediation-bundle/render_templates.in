@@ -1,0 +1,53 @@
+#!/bin/bash
+
+set -eux
+
+
+# Fixes vars
+UPSTREAM_DIR="upstream"
+MANIFESTS_DIR="bundle/manifests"
+METADATA_DIR="bundle/metadata"
+TESTS_DIR="bundle/tests"
+OPERATOR_NAME="self-node-remediation"
+CSV=${MANIFESTS_DIR}/${OPERATOR_NAME}.clusterserviceversion.yaml
+
+
+# Get upstream repository
+rm -rf "${UPSTREAM_DIR}"
+git config --global core.sshCommand 'ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+git clone "${CI_SELF_NODE_REMEDIATION_UPSTREAM_URL}" "${UPSTREAM_DIR}"
+[ $? -ne 0 ] && { echo "ERROR: Could not clone upstream release repo."; exit 4; }
+cd "${UPSTREAM_DIR}"
+git checkout "${CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT}"
+cd ..
+
+# Copy upstream manifests
+rm -rf "${MANIFESTS_DIR}" "${METADATA_DIR}" "${TESTS_DIR}"
+mkdir -p bundle
+mv "${UPSTREAM_DIR}/bundle/manifests" "${MANIFESTS_DIR}"
+mv "${UPSTREAM_DIR}/bundle/metadata" "${METADATA_DIR}"
+mv "${UPSTREAM_DIR}/bundle/tests" "${TESTS_DIR}"
+
+# Update image URLs
+# Note: "mage: ..." matches both image and containerImage
+sed -r -i "s|mage: quay.io/medik8s/${OPERATOR_NAME}.*|mage: registry-proxy.engineering.redhat.com/rh-osbs/red-hat-workload-availability-${OPERATOR_NAME}:v${CI_VERSION}|g;" "${CSV}"
+
+# Update build date
+sed -r -i "s|createdAt: .*|createdAt: `date '+%Y-%m-%d %T'`|;" "${CSV}"
+
+# Update version
+sed -r -i "s|name: ${OPERATOR_NAME}.v.*|name: ${OPERATOR_NAME}.v${CI_VERSION}|;" "${CSV}"
+sed -r -i "s|version: 0.0.1|version: ${CI_VERSION}|;" "${CSV}"
+
+# Update Medik8s to Dragonfly
+sed -r -i "s|email: medik8s@googlegroups.com|email: team-dragonfly@redhat.com|;" "${CSV}"
+sed -r -i "s|name: medik8s Team|name: Dragonfly Team|;" "${CSV}"
+
+# Update Medik8s to Red Hat 
+sed -r -i "s|support: Medik8s|support: Red Hat|;" "${CSV}"
+sed -r -i "s|  name: medik8s|  name: Red Hat|;" "${CSV}"
+
+# Add Two OCP Annotations
+# sed -r -i "s| description: Self Node Remediation Operator for remediate itself in case of a failure.| description: Self Node Remediation Operator for remediate itself in case of a failure.\n operators.openshift.io/infrastructure-features: '["disconnected"]'\n operators.openshift.io/valid-subscription: '["OpenShift Kubernetes Engine", "OpenShift Container Platform", "OpenShift Platform Plus"]'|;" "${CSV}"
+
+rm -rf "${UPSTREAM_DIR}"

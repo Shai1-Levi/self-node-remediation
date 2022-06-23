@@ -1,5 +1,5 @@
-#@follow_tag(registry-proxy.engineering.redhat.com/rh-osbs/openshift-ose-must-gather:v4.10)
-FROM registry-proxy.engineering.redhat.com/rh-osbs/openshift-ose-must-gather:v4.10.0-202205190747.p0.ge1c9bc4.assembly.stream
+#@follow_tag(registry-proxy.engineering.redhat.com/rh-osbs/openshift-ose-must-gather:v4.11)
+FROM registry-proxy.engineering.redhat.com/rh-osbs/openshift-ose-must-gather:v4.11.0-202206230045.p0.g6a8ee9f.assembly.stream
 
 COPY $REMOTE_SOURCE $REMOTE_SOURCE_DIR
 
@@ -11,7 +11,9 @@ ENTRYPOINT /usr/bin/gather
 LABEL com.redhat.component="self-node-remediation-must-gather-container" \
       name="red-hat-workload-availability/self-node-remediation-must-gather-rhel8" \
       version="${CI_CONTAINER_VERSION}" \
-      upstream_commit="${CI_MUST_GATHER_UPSTREAM_COMMIT}" \
+      upstream-version="${CI_SELF_NODE_REMEDIATION_UPSTREAM_VERSION}" \
+      upstream-vcs-ref="${CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT}" \
+      upstream-vcs-type="git" \
       summary="Self Node Remediation Must Gather image" \
       io.openshift.expose-services="" \
       io.openshift.tags="rhwa,lifecycle,node,maintenance,logs" \
