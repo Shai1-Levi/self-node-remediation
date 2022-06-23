@@ -1,0 +1,22 @@
+#@follow_tag(registry-proxy.engineering.redhat.com/rh-osbs/openshift-ose-must-gather:v4.11)
+FROM registry-proxy.engineering.redhat.com/rh-osbs/openshift-ose-must-gather:v4.11.0-202206230045.p0.g6a8ee9f.assembly.stream
+
+COPY $REMOTE_SOURCE $REMOTE_SOURCE_DIR
+
+RUN mv /usr/bin/gather{,_original} && \
+    cp $REMOTE_SOURCE_DIR/app/collection-scripts/* /usr/bin
+
+ENTRYPOINT /usr/bin/gather
+
+LABEL com.redhat.component="self-node-remediation-must-gather-container" \
+      name="red-hat-workload-availability/self-node-remediation-must-gather-rhel8" \
+      version="${CI_CONTAINER_VERSION}" \
+      upstream-version="${CI_SELF_NODE_REMEDIATION_UPSTREAM_VERSION}" \
+      upstream-vcs-ref="${CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT}" \
+      upstream-vcs-type="git" \
+      summary="Self Node Remediation Must Gather image" \
+      io.openshift.expose-services="" \
+      io.openshift.tags="rhwa,lifecycle,node,maintenance,logs" \
+      io.k8s.display-name="Self Node Remediation Must Gather Imgae" \
+      maintainer="Dragonfly Team <team-dragonfly@redhat.com>" \
+      description="Self Node Remediation Must Gather is a tool that integrates which OCP must-gather utility to collect debug info related to Self Node Remediation"

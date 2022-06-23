@@ -1,0 +1,32 @@
+#@follow_tag(registry-proxy.engineering.redhat.com/rh-osbs/openshift-golang-builder:1.18)
+FROM registry-proxy.engineering.redhat.com/rh-osbs/openshift-golang-builder:v1.18.2-202206222023.el8.gb30794b AS builder
+
+COPY $REMOTE_SOURCE $REMOTE_SOURCE_DIR
+
+WORKDIR ${REMOTE_SOURCE_DIR}/app/
+
+# Build
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -a -o manager main.go
+
+#@follow_tag(registry.redhat.io/ubi8/ubi-micro:latest)
+FROM registry.redhat.io/ubi8/ubi-micro:8.6-285
+
+COPY --from=builder /$REMOTE_SOURCE_DIR/app/manager /manager
+COPY --from=builder /$REMOTE_SOURCE_DIR/app/install/ /install/
+
+
+ENTRYPOINT ["/manager"]
+
+USER ${USER_UID}
+
+LABEL com.redhat.component="self-node-remediation-operator-container" \
+      name="red-hat-workload-availability/self-node-remediation" \
+      version="${CI_CONTAINER_VERSION}" \
+      upstream-version="${CI_SELF_NODE_REMEDIATION_UPSTREAM_VERSION}" \
+      upstream-vcs-ref="${CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT}" \
+      upstream-vcs-type="git" \
+      summary="OpenShift Self Node Remediation" \
+      io.k8s.display-name="OpenShift Self Node Remediation" \
+      maintainer="Dragonfly Team <team-dragonfly@redhat.com>" \
+      description="OpenShift Self Node Remediation which is an OLM installable operator that install the Self Node Remediation agent"
+

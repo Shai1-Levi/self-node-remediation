@@ -1,0 +1,21 @@
+remote_source:
+  repo: ${CI_SELF_NODE_REMEDIATION_UPSTREAM_URL}
+  ref:  ${CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT}
+  pkg_managers:
+    - gomod
+  flags:
+    - gomod-vendor
+image_build_method: imagebuilder
+platforms:
+  only:
+    - x86_64
+operator_manifests:
+  # Relative path to your manifests dir from root of repo
+  manifests_dir: manifests
+  enable_digest_pinning: true
+  enable_repo_replacements: true
+  enable_registry_replacements: true
+  repo_replacements:
+    - registry: registry-proxy.engineering.redhat.com
+      package_mappings:
+        self-node-remediation-operator-container: workload-availability/self-node-remediation-rhel8-operator

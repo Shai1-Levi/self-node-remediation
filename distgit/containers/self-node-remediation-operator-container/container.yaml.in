@@ -1,0 +1,11 @@
+remote_source:
+  repo: ${CI_SELF_NODE_REMEDIATION_UPSTREAM_URL}
+  ref:  ${CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT}
+  pkg_managers:
+    - gomod
+  flags:
+    - gomod-vendor
+image_build_method: imagebuilder
+platforms:
+  only:
+  - x86_64

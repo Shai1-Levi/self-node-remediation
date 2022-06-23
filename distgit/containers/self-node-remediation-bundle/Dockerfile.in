@@ -1,0 +1,51 @@
+FROM scratch
+
+# Notice these COPY lines set up the only content.
+# Notice also that only *one* version of the operator is copied in.
+# This is different from how old appregistry delivery worked, where
+# you would copy in *all* versions of your operator.
+COPY bundle/manifests /manifests/
+COPY bundle/metadata /metadata/
+COPY bundle/tests /tests/
+
+# These are three labels needed to control how the pipeline should handle this container image
+# This first label tells the pipeline that this is a bundle image and should be
+# delivered via an index image
+LABEL com.redhat.delivery.operator.bundle=true
+
+# This second label tells the pipeline which versions of OpenShift the operator supports (4.5+).
+# This is used to control which index images should include this operator.
+LABEL com.redhat.openshift.versions="4.11"
+
+# This third label tells the pipeline that this operator should *also* be supported on OCP 4.4 and
+# earlier.  It is used to control whether or not the pipeline should attempt to automatically
+# backport this content into the old appregistry format and upload it to the quay.io application
+# registry endpoints.
+LABEL com.redhat.delivery.backport=false
+
+# The rest of these labels are copies of the same content in annotations.yaml and are needed by OLM
+# Note the package name and channels which are very important!
+LABEL operators.operatorframework.io.bundle.mediatype.v1=registry+v1
+LABEL operators.operatorframework.io.bundle.manifests.v1=manifests/
+LABEL operators.operatorframework.io.bundle.metadata.v1=metadata/
+LABEL operators.operatorframework.io.bundle.package.v1=self-node-remediation
+LABEL operators.operatorframework.io.bundle.channels.v1=stable
+LABEL operators.operatorframework.io.bundle.channel.default.v1=stable
+
+# This last block are standard Red Hat container labels
+LABEL \
+        com.redhat.component="self-node-remediation-operator-bundle-container" \
+        name="red-hat-workload-availability/self-node-remediation-bundle" \
+        version="${CI_CONTAINER_VERSION}" \
+        release="${CI_CONTAINER_RELEASE}" \
+        upstream-version="${CI_SELF_NODE_REMEDIATION_UPSTREAM_VERSION}" \
+        upstream-vcs-ref="${CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT}" \
+        upstream-vcs-type="git" \
+        summary="Self Node Remediation bundle" \
+        License="ASL 2.0" \
+        io.openshift.expose-services="" \
+        io.openshift.tags="rhwa,snr,remediation" \
+        io.k8s.display-name="Self Node Remediation bundle" \
+        io.k8s.description="Self Node Remediation bundle" \
+        maintainer="Dragonfly Team <team-dragonfly@redhat.com>" \
+        description="Self Node Remediation bundle" 
