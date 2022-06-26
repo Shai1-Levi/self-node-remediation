@@ -5,5 +5,5 @@ git:
   url: https://github.com/medik8s/self-node-remediation.git
 - automerge: 'yes'
   branch: master
-  commit: 8f9f25138cf57cfcae695e0dbdf9d3ddab04b27d
+  commit: 1fb479cc9be77a37c273345faa5a38bdedff125e
   url: https://github.com/medik8s/must-gather.git
