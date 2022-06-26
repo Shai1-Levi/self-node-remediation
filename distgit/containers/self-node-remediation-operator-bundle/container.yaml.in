@@ -11,7 +11,7 @@ platforms:
     - x86_64
 operator_manifests:
   # Relative path to your manifests dir from root of repo
-  manifests_dir: manifests
+  manifests_dir: bundle/manifests
   enable_digest_pinning: true
   enable_repo_replacements: true
   enable_registry_replacements: true

@@ -31,6 +31,7 @@ mv "${UPSTREAM_DIR}/bundle/tests" "${TESTS_DIR}"
 # Update image URLs
 # Note: "mage: ..." matches both image and containerImage
 sed -r -i "s|mage: quay.io/medik8s/${OPERATOR_NAME}.*|mage: registry-proxy.engineering.redhat.com/rh-osbs/red-hat-workload-availability-${OPERATOR_NAME}:v${CI_VERSION}|g;" "${CSV}"
+sed -r -i "s|value: quay.io/medik8s/${OPERATOR_NAME}.*|value: registry-proxy.engineering.redhat.com/rh-osbs/red-hat-workload-availability-${OPERATOR_NAME}:v${CI_VERSION}|g;" "${CSV}"
 
 # Update build date
 sed -r -i "s|createdAt: .*|createdAt: `date '+%Y-%m-%d %T'`|;" "${CSV}"
