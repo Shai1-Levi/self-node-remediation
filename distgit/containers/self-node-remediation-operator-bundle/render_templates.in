@@ -42,7 +42,7 @@ sed -r -i "s|version: 0.0.1|version: ${CI_VERSION}|;" "${CSV}"
 
 # Update Medik8s to Dragonfly
 sed -r -i "s|email: medik8s@googlegroups.com|email: team-dragonfly@redhat.com|;" "${CSV}"
-sed -r -i "s|name: medik8s Team|name: Dragonfly Team|;" "${CSV}"
+sed -r -i "s|name: medik8s team|name: Dragonfly Team|;" "${CSV}"
 
 # Update Medik8s to Red Hat 
 sed -r -i "s|support: Medik8s|support: Red Hat|;" "${CSV}"
