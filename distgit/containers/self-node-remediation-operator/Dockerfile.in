@@ -22,11 +22,12 @@ USER ${USER_UID}
 LABEL com.redhat.component="self-node-remediation-operator-container" \
       name="red-hat-workload-availability/self-node-remediation" \
       version="${CI_CONTAINER_VERSION}" \
+      release="${CI_CONTAINER_RELEASE}" \
       upstream-version="${CI_SELF_NODE_REMEDIATION_UPSTREAM_VERSION}" \
       upstream-vcs-ref="${CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT}" \
       upstream-vcs-type="git" \
+      description="OpenShift Self Node Remediation which is an OLM installable operator that install the Self Node Remediation agent" \
       summary="OpenShift Self Node Remediation" \
       io.k8s.display-name="OpenShift Self Node Remediation" \
-      maintainer="Dragonfly Team <team-dragonfly@redhat.com>" \
-      description="OpenShift Self Node Remediation which is an OLM installable operator that install the Self Node Remediation agent"
+      maintainer="Dragonfly Team <team-dragonfly@redhat.com>" 
 
