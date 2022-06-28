@@ -41,11 +41,12 @@ LABEL \
         upstream-version="${CI_SELF_NODE_REMEDIATION_UPSTREAM_VERSION}" \
         upstream-vcs-ref="${CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT}" \
         upstream-vcs-type="git" \
+        description="Self Node Remediation bundle" \
         summary="Self Node Remediation bundle" \
         License="ASL 2.0" \
         io.openshift.expose-services="" \
         io.openshift.tags="rhwa,snr,remediation" \
         io.k8s.display-name="Self Node Remediation bundle" \
         io.k8s.description="Self Node Remediation bundle" \
-        maintainer="Dragonfly Team <team-dragonfly@redhat.com>" \
-        description="Self Node Remediation bundle" 
+        maintainer="Dragonfly Team <team-dragonfly@redhat.com>" 
+
