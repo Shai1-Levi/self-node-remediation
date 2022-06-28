@@ -47,6 +47,7 @@ sed -r -i "s|name: medik8s Team|name: Dragonfly Team|;" "${CSV}"
 # Update Medik8s to Red Hat 
 sed -r -i "s|support: Medik8s|support: Red Hat|;" "${CSV}"
 sed -r -i "s|  name: medik8s|  name: Red Hat|;" "${CSV}"
+sed -r -i "s| url: https://github.com/medik8s| url: https://www.redhat.com|;" "${CSV}"
 
 # Add Two OCP Annotations
 # sed -r -i "s| description: Self Node Remediation Operator for remediate itself in case of a failure.| description: Self Node Remediation Operator for remediate itself in case of a failure.\n operators.openshift.io/infrastructure-features: '["disconnected"]'\n operators.openshift.io/valid-subscription: '["OpenShift Kubernetes Engine", "OpenShift Container Platform", "OpenShift Platform Plus"]'|;" "${CSV}"
