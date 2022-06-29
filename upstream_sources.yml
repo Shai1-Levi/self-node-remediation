@@ -1,9 +1,9 @@
 git:
 - automerge: 'yes'
   branch: main
-  commit: 9db21477b8709f228b54190b93fbf4bb0dd3493a
+  commit: dd096efe86be84b823c57486d8a779f3fe0ef301
   url: https://github.com/medik8s/self-node-remediation.git
 - automerge: 'yes'
   branch: master
-  commit: 1fb479cc9be77a37c273345faa5a38bdedff125e
+  commit: 0e7b6bbb4af6f1cb015c2cfff5d2772376f62472
   url: https://github.com/medik8s/must-gather.git
