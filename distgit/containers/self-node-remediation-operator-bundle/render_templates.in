@@ -47,6 +47,7 @@ sed -r -i "s|name: medik8s team|name: Dragonfly Team|;" "${CSV}"
 # Update Medik8s to Red Hat 
 sed -r -i "s|support: Medik8s|support: Red Hat|;" "${CSV}"
 sed -r -i "s|  name: medik8s|  name: Red Hat|;" "${CSV}"
+sed -r -i "s| url: https://github.com/medik8s| url: https://www.redhat.com|;" "${CSV}"
 
 # Add Two OCP Annotations
 skipRange=$(grep 'olm.skipRange:' ${CSV} | tail -n1);
