@@ -47,11 +47,14 @@ sed -r -i "s|name: medik8s team|name: Dragonfly Team|;" "${CSV}"
 # Update Medik8s to Red Hat 
 sed -r -i "s|support: Medik8s|support: Red Hat|;" "${CSV}"
 sed -r -i "s|  name: medik8s|  name: Red Hat|;" "${CSV}"
-sed -r -i "s| url: https://github.com/medik8s| url: https://www.redhat.com|;" "${CSV}"
+sed -r -i "s|url: https://www.medik8s.io/|url: https://www.redhat.com|;" "${CSV}"
 
 # Add Two OCP Annotations
-skipRange=$(grep 'olm.skipRange:' ${CSV} | tail -n1);
-sed -r -i "s|$skipRange|$skipRange\n    operators.openshift.io/infrastructure-features: '[\"disconnected\"]'\n    operators.openshift.io/valid-subscription: '[\"OpenShift Kubernetes Engine\", \"OpenShift Container Platform\", \"OpenShift Platform Plus\"]'|;" "${CSV}"
+sed -r -i "/    olm.skipRange:.*/a \    operators.openshift.io/valid-subscription: '[\"OpenShift Kubernetes Engine\", \"OpenShift Container Platform\", \"OpenShift Platform Plus\"]'" "${CSV}"
+sed -r -i "/    olm.skipRange:.*/a \    operators.openshift.io/infrastructure-features: '[\"disconnected\"]'" "${CSV}"
+
+# Update URL link to OCP docs
+sed -r -i "s|url: https://medik8s.io|url: https://docs.openshift.com/container-platform/latest/nodes/nodes/eco-self-node-remediation-operator.html|;" "${CSV}"
 
 
 rm -rf "${UPSTREAM_DIR}"
