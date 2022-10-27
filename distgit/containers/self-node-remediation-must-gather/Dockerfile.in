@@ -1,5 +1,5 @@
 #@follow_tag(registry-proxy.engineering.redhat.com/rh-osbs/openshift-ose-must-gather:v4.11)
-FROM registry-proxy.engineering.redhat.com/rh-osbs/openshift-ose-must-gather:v4.11.0-202207191902.p0.g32bca40.assembly.stream
+FROM registry-proxy.engineering.redhat.com/rh-osbs/openshift-ose-must-gather:v4.11.0-202210262118.p0.g32bca40.assembly.stream
 
 COPY $REMOTE_SOURCE $REMOTE_SOURCE_DIR
 
