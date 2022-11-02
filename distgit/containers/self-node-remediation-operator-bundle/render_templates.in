@@ -54,7 +54,7 @@ sed -r -i "/    olm.skipRange:.*/a \    operators.openshift.io/valid-subscriptio
 sed -r -i "/    olm.skipRange:.*/a \    operators.openshift.io/infrastructure-features: '[\"disconnected\"]'" "${CSV}"
 
 # Update URL link to OCP docs
-OCP_Y_VERSION=4.11
+OCP_Y_VERSION=4.12
 sed -r -i "s|url: https://medik8s.io|url: https://docs.openshift.com/container-platform/$OCP_Y_VERSION/nodes/nodes/eco-self-node-remediation-operator.html|;" "${CSV}"
 
 
