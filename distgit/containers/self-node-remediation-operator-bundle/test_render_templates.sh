@@ -6,5 +6,6 @@ export CI_SELF_NODE_REMEDIATION_UPSTREAM_COMMIT=ba384c8956e93413c63dd9abdb3e70d3
 
 # see gcp_env/product_version
 export CI_VERSION=0.5.0
+export OCP_Y_VERSION=4.11
 
 ./render_templates.in
