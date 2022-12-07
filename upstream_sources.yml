@@ -1,7 +1,7 @@
 git:
 - automerge: 'yes'
   branch: main
-  commit: 889d791b9f6c446291f0af79330312559a81b795
+  commit: 546b3a36fa8042bd3423b7437365f8927c6325f1
   url: https://github.com/medik8s/self-node-remediation.git
 - automerge: 'yes'
   branch: main
