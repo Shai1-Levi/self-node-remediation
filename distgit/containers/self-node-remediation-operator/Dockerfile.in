@@ -1,5 +1,5 @@
 #@follow_tag(registry-proxy.engineering.redhat.com/rh-osbs/openshift-golang-builder:v1.19)
-FROM registry-proxy.engineering.redhat.com/rh-osbs/openshift-golang-builder:v1.18.7-202211011909.el8.g6e2fb6e AS builder
+FROM registry-proxy.engineering.redhat.com/rh-osbs/openshift-golang-builder:v1.19.2-202212051800.el8.g9b471e1 AS builder
 
 COPY $REMOTE_SOURCE $REMOTE_SOURCE_DIR
 
