@@ -3,7 +3,3 @@ git:
   branch: release-0.5
   commit: 3e60fd91de01e2b471dc09e0ba3b09c351e3329f
   url: https://github.com/medik8s/self-node-remediation.git
-- automerge: 'yes'
-  branch: main
-  commit: 9e9b952242d1bdb2a6dbad79a396f6889305ddcc
-  url: https://github.com/medik8s/must-gather.git
