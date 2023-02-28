@@ -58,6 +58,6 @@ OCP_Y_VERSION=4.11
 sed -r -i "s|url: https://medik8s.io|url: https://docs.openshift.com/container-platform/$OCP_Y_VERSION/nodes/nodes/eco-self-node-remediation-operator.html|;" "${CSV}"
 
 # Update Channels for annotations.yaml file - EUS version
-sed -r -i "s|channels.v1:.*|channels.v1: 4.12-eus,stable|;" "${ANNOTATIONS}"
+#sed -r -i "s|channels.v1:.*|channels.v1: 4.12-eus,stable|;" "${ANNOTATIONS}"
 
 rm -rf "${UPSTREAM_DIR}"
