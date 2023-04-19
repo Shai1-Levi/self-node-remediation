@@ -54,8 +54,8 @@ sed -r -i "/    olm.skipRange:.*/a \    operators.openshift.io/valid-subscriptio
 sed -r -i "/    olm.skipRange:.*/a \    operators.openshift.io/infrastructure-features: '[\"disconnected\"]'" "${CSV}"
 
 # Update URL link to OCP docs
-OCP_Y_VERSION=4.11
-sed -r -i "s|url: https://medik8s.io|url: https://docs.openshift.com/container-platform/$OCP_Y_VERSION/nodes/nodes/eco-self-node-remediation-operator.html|;" "${CSV}"
+RHWA_RELEASE=23.2
+sed -r -i "s|url: https://medik8s.io|url: https://access.redhat.com/documentation/en-us/workload_availability_for_red_hat_openshift/$RHWA_RELEASE/html/remediation_fencing_and_maintenance.html|;" "${CSV}"
 
 # Update Channels for annotations.yaml file - EUS version
 #sed -r -i "s|channels.v1:.*|channels.v1: 4.12-eus,stable|;" "${ANNOTATIONS}"
