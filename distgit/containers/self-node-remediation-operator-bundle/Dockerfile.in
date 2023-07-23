@@ -30,7 +30,7 @@ LABEL operators.operatorframework.io.bundle.manifests.v1=manifests/
 LABEL operators.operatorframework.io.bundle.metadata.v1=metadata/
 LABEL operators.operatorframework.io.bundle.package.v1=self-node-remediation
 LABEL operators.operatorframework.io.bundle.channels.v1=stable
-LABEL operators.operatorframework.io.bundle.channel.default.v1=stable
+LABEL operators.operatorframework.io.bundle.channel.default.v1=4.14-eus,stable
 
 # This last block are standard Red Hat container labels
 LABEL \
