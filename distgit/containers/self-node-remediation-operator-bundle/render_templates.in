@@ -10,6 +10,7 @@ CHANNELS=stable
 RHWA_RELEASE=24.1
 #Make sure to update in each release
 previousRelease="0.7.1"
+currentRelease="0.8.0"
 
 # Fixes vars
 UPSTREAM_DIR="upstream"
@@ -47,6 +48,7 @@ sed -r -i "s|createdAt: .*|createdAt: `date '+%Y-%m-%d %T'`|;" "${CSV}"
 # Update version
 sed -r -i "s|name: ${OPERATOR_NAME}.v.*|name: ${OPERATOR_NAME}.v${CI_VERSION}|;" "${CSV}"
 sed -r -i "s|version: 0.0.1|version: ${CI_VERSION}|;" "${CSV}"
+sed -r -i "s|olm.skipRange: .*|olm.skipRange: '>=0.4.0 <${currentRelease}'|;" ${CSV}
 
 # Update Medik8s to Dragonfly
 sed -r -i "s|email: medik8s@googlegroups.com|email: team-dragonfly@redhat.com|;" "${CSV}"
@@ -57,7 +59,7 @@ sed -r -i "s|support: Medik8s|support: Red Hat|;" "${CSV}"
 sed -r -i "s|  name: Medik8s|  name: Red Hat|;" "${CSV}"
 sed -r -i "s|url: https://www.medik8s.io/|url: https://www.redhat.com|;" "${CSV}"
 
-# Add Two OCP Annotations
+# Add OCP Annotations
 sed -r -i "/    olm.skipRange:.*/a \    operators.openshift.io/valid-subscription: '[\"OpenShift Kubernetes Engine\", \"OpenShift Container Platform\", \"OpenShift Platform Plus\"]'" "${CSV}"
 sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/disconnected: \"true\"" "${CSV}"
 sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/fips-compliant: \"false\"" "${CSV}"
