@@ -2,14 +2,12 @@
 
 set -eux
 
-# Bundle channels
-# !!! keep aligned with the channels in the Dockerfile.in !!!!
+## MAKE SURE TO UPDATE IN EACH RELEASE ##
+RHWA_RELEASE=24.1 # Update URL link to OCP docs
+PREVIOUS_VERSION="0.7.1" # For the replaces field in the CSV, set to the last released version, Prevents removal of that version from index
+SKIP_RANGE_LOWER="0.7.0" # skip range lower boundary, set to last eus version 0.7.x = 4.14-eus
+CHANNELS=stable # Bundle channels !!! keep aligned with the channels in the Dockerfile.in !!!!
 #CHANNELS=4.14-eus,stable
-CHANNELS=stable
-# Update URL link to OCP docs
-RHWA_RELEASE=24.1
-#Make sure to update in each release
-previousRelease="0.7.1"
 
 # Fixes vars
 UPSTREAM_DIR="upstream"
@@ -47,6 +45,7 @@ sed -r -i "s|createdAt: .*|createdAt: `date '+%Y-%m-%d %T'`|;" "${CSV}"
 # Update version
 sed -r -i "s|name: ${OPERATOR_NAME}.v.*|name: ${OPERATOR_NAME}.v${CI_VERSION}|;" "${CSV}"
 sed -r -i "s|version: 0.0.1|version: ${CI_VERSION}|;" "${CSV}"
+sed -r -i "s|olm.skipRange: .*|olm.skipRange: '>=${SKIP_RANGE_LOWER} <${CI_VERSION}'|;" ${CSV}
 
 # Update Medik8s to Dragonfly
 sed -r -i "s|email: medik8s@googlegroups.com|email: team-dragonfly@redhat.com|;" "${CSV}"
@@ -57,7 +56,7 @@ sed -r -i "s|support: Medik8s|support: Red Hat|;" "${CSV}"
 sed -r -i "s|  name: Medik8s|  name: Red Hat|;" "${CSV}"
 sed -r -i "s|url: https://www.medik8s.io/|url: https://www.redhat.com|;" "${CSV}"
 
-# Add Two OCP Annotations
+# Add OCP Annotations
 sed -r -i "/    olm.skipRange:.*/a \    operators.openshift.io/valid-subscription: '[\"OpenShift Kubernetes Engine\", \"OpenShift Container Platform\", \"OpenShift Platform Plus\"]'" "${CSV}"
 sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/disconnected: \"true\"" "${CSV}"
 sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/fips-compliant: \"false\"" "${CSV}"
@@ -68,7 +67,7 @@ sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/token-au
 sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/token-auth-gcp: \"false\"" "${CSV}"
 
 
-sed -r -i "s|replaces: ${OPERATOR_NAME}.v *.*|replaces: ${OPERATOR_NAME}.v${previousRelease}|;" "${CSV}"
+sed -r -i "s|replaces: ${OPERATOR_NAME}.v *.*|replaces: ${OPERATOR_NAME}.v${PREVIOUS_VERSION}|;" "${CSV}"
 
 
 sed -r -i "s|url: https://medik8s.io|url: https://access.redhat.com/documentation/en-us/workload_availability_for_red_hat_openshift/$RHWA_RELEASE/html/remediation_fencing_and_maintenance.html|;" "${CSV}"
