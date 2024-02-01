@@ -9,7 +9,7 @@ WORKDIR ${REMOTE_SOURCE_DIR}/app/
 RUN CI_UPSTREAM_VERSION=$CI_CONTAINER_VERSION CI_COMMIT=$CI_UPSTREAM_COMMIT ./hack/build.sh
 
 #@follow_tag(registry.redhat.io/ubi8/ubi:latest)
-FROM registry.redhat.io/ubi8/ubi:8.9-1107.1705420509
+FROM registry.redhat.io/ubi8/ubi:8.9-1107.1706690950
 
 WORKDIR /
 COPY --from=builder ${REMOTE_SOURCE_DIR}/app/bin/manager .
