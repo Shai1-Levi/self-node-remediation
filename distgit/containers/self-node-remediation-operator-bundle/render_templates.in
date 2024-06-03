@@ -3,8 +3,8 @@
 set -eux
 
 ## MAKE SURE TO UPDATE IN EACH RELEASE ##
-RHWA_RELEASE=24.1 # Update URL link to OCP docs
-PREVIOUS_VERSION="0.7.1" # For the replaces field in the CSV, set to the last released version, Prevents removal of that version from index
+RHWA_RELEASE=24.3 # Update URL link to OCP docs
+PREVIOUS_VERSION="0.8.0" # For the replaces field in the CSV, set to the last released version, Prevents removal of that version from index
 SKIP_RANGE_LOWER="0.7.0" # skip range lower boundary, set to last eus version 0.7.x = 4.14-eus
 CHANNELS=stable # Bundle channels !!! keep aligned with the channels in the Dockerfile.in !!!!
 #CHANNELS=4.14-eus,stable
