@@ -8,6 +8,7 @@ PREVIOUS_VERSION="0.8.0" # For the replaces field in the CSV, set to the last re
 SKIP_RANGE_LOWER="0.7.0" # skip range lower boundary, set to last eus version 0.7.x = 4.14-eus
 CHANNELS=stable # Bundle channels !!! keep aligned with the channels in the Dockerfile.in !!!!
 #CHANNELS=4.14-eus,stable
+RBAC_PROXY_OCP_VERSION="4.15"
 
 # Fixes vars
 UPSTREAM_DIR="upstream"
@@ -38,6 +39,7 @@ mv "${UPSTREAM_DIR}/bundle/tests" "${TESTS_DIR}"
 # Note: "mage: ..." matches both image and containerImage
 sed -r -i "s|mage: quay.io/medik8s/${OPERATOR_NAME}.*|mage: registry-proxy.engineering.redhat.com/rh-osbs/red-hat-workload-availability-${OPERATOR_NAME}:v${CI_VERSION}|g;" "${CSV}"
 sed -r -i "s|value: quay.io/medik8s/${OPERATOR_NAME}.*|value: registry-proxy.engineering.redhat.com/rh-osbs/red-hat-workload-availability-${OPERATOR_NAME}:v${CI_VERSION}|g;" "${CSV}"
+sed -r -i "s|mage: .*/kube-rbac-proxy.*|mage: registry.redhat.io/openshift4/ose-kube-rbac-proxy:v${RBAC_PROXY_OCP_VERSION}|g;" "${CSV}"
 
 # Update build date
 sed -r -i "s|createdAt: .*|createdAt: `date '+%Y-%m-%d %T'`|;" "${CSV}"
