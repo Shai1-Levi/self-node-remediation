@@ -5,9 +5,13 @@ set -eux
 ## MAKE SURE TO UPDATE IN EACH RELEASE ##
 RHWA_RELEASE=24.3 # Update URL link to OCP docs
 PREVIOUS_VERSION="0.8.0" # For the replaces field in the CSV, set to the last released version, Prevents removal of that version from index
-SKIP_RANGE_LOWER="0.7.0" # skip range lower boundary, set to last eus version 0.7.x = 4.14-eus
-CHANNELS=stable # Bundle channels !!! keep aligned with the channels in the Dockerfile.in !!!!
-#CHANNELS=4.14-eus,stable
+ # For an eus release SKIP_RANGE_LOWER should be set to the previous eus release, in order to enable upgrade between eus releases (i.e for example at 0.9.0 eus-4.16 set SKIP_RANGE_LOWER to 0.7.X which matches eus-4.14).
+ # For a non eus release SKIP_RANGE_LOWER should be set to the previous version in order to enable upgrade only from the previous version (i.e for example at 0.8.0 set SKIP_RANGE_LOWER to 0.7.X)
+SKIP_RANGE_LOWER="0.7.0"
+# Bundle channels !!! keep aligned with the channels in the Dockerfile.in !!!!
+#CHANNELS=stable
+CHANNELS=4.16-eus,stable
+
 RBAC_PROXY_OCP_VERSION="4.15"
 
 # Fixes vars
