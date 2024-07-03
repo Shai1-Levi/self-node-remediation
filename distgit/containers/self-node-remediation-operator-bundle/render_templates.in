@@ -53,6 +53,7 @@ sed -r -i "s|name: ${OPERATOR_NAME}.v.*|name: ${OPERATOR_NAME}.v${CI_VERSION}|;"
 sed -r -i "s|version: 0.0.1|version: ${CI_VERSION}|;" "${CSV}"
 sed -r -i "s|olm.skipRange: .*|olm.skipRange: '>=${SKIP_RANGE_LOWER} <${CI_VERSION}'|;" ${CSV}
 
+# add replaces field
 sed -r -i "/  version: ${CI_VERSION}/ a\  replaces: ${OPERATOR_NAME}.v${PREVIOUS_VERSION}" ${CSV}
 
 
@@ -75,6 +76,7 @@ sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/token-au
 sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/token-auth-azure: \"false\"" "${CSV}"
 sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/token-auth-gcp: \"false\"" "${CSV}"
 
+# Update URL link to OCP docs
 sed -r -i "s|url: https://medik8s.io|url: https://access.redhat.com/documentation/en-us/workload_availability_for_red_hat_openshift/$RHWA_RELEASE/html/remediation_fencing_and_maintenance.html|;" "${CSV}"
 
 # Update Channels for annotations.yaml file - EUS version
