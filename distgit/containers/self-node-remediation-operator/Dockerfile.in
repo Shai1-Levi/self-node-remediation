@@ -1,15 +1,16 @@
-#@follow_tag(registry-proxy.engineering.redhat.com/rh-osbs/openshift-golang-builder:v1.21)
-FROM registry-proxy.engineering.redhat.com/rh-osbs/openshift-golang-builder:v1.21.11-202407030000.gab74a9a.el9 AS builder
+#@follow_tag(registry-proxy.engineering.redhat.com/rh-osbs/openshift-golang-builder:rhel_9_1.21)
+FROM registry-proxy.engineering.redhat.com/rh-osbs/openshift-golang-builder:v1.21.11-202407021847.g1ac3e39.el8 AS builder
 
 COPY $REMOTE_SOURCE $REMOTE_SOURCE_DIR
 
 WORKDIR ${REMOTE_SOURCE_DIR}/app/
 
 # Build
-RUN CI_UPSTREAM_VERSION=$CI_CONTAINER_VERSION CI_COMMIT=$CI_UPSTREAM_COMMIT ./hack/build.sh
+RUN CI_UPSTREAM_VERSION=$CI_CONTAINER_VERSION CI_COMMIT=$CI_UPSTREAM_COMMIT \
+      LDFLAGS_DEBUG=" " CGO_ENABLED=1 GOFLAGS="-tags=strictfipsruntime,openssl" GOEXPERIMENT="strictfipsruntime" ./hack/build.sh
 
-#@follow_tag(registry.redhat.io/ubi9/ubi:latest)
-FROM registry.redhat.io/ubi9/ubi:9.4-1214.1726694543
+#@follow_tag(registry.redhat.io/rhel9-4-els/rhel-minimal:9.4)
+FROM registry.redhat.io/rhel9-4-els/rhel-minimal:9.4-46.1726694546
 
 WORKDIR /
 COPY --from=builder ${REMOTE_SOURCE_DIR}/app/bin/manager .
