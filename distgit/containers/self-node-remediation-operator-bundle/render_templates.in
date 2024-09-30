@@ -69,7 +69,7 @@ sed -r -i "s|url: https://www.medik8s.io/|url: https://www.redhat.com|;" "${CSV}
 # Add OCP Annotations
 sed -r -i "/    olm.skipRange:.*/a \    operators.openshift.io/valid-subscription: '[\"OpenShift Kubernetes Engine\", \"OpenShift Container Platform\", \"OpenShift Platform Plus\"]'" "${CSV}"
 sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/disconnected: \"true\"" "${CSV}"
-sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/fips-compliant: \"false\"" "${CSV}"
+sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/fips-compliant: \"true\"" "${CSV}"
 sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/proxy-aware: \"false\"" "${CSV}"
 sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/tls-profiles: \"false\"" "${CSV}"
 sed -r -i "/    olm.skipRange:.*/a \    features.operators.openshift.io/token-auth-aws: \"false\"" "${CSV}"
