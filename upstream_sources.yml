@@ -1,5 +1,5 @@
 git:
 - automerge: 'yes'
-  branch: release-0.9
-  commit: 45688b32541c67fb58990db99d228f87bac00a2e
+  branch: main
+  commit: 2f6bd775bf4cb5de3dbfecfd7495a9f8d91c01a8
   url: https://github.com/medik8s/self-node-remediation.git
