@@ -271,6 +271,9 @@ add-ocp-annotations: yq ## Add OCP annotations
 	$(YQ) -i '.metadata.annotations."features.operators.openshift.io/token-auth-aws" = "false"' ${CSV}
 	$(YQ) -i '.metadata.annotations."features.operators.openshift.io/token-auth-azure" = "false"' ${CSV}
 	$(YQ) -i '.metadata.annotations."features.operators.openshift.io/token-auth-gcp" = "false"' ${CSV}
+	$(YQ) -i '.metadata.annotations."features.operators.openshift.io/cnf" = "false"' ${CSV}
+	$(YQ) -i '.metadata.annotations."features.operators.openshift.io/cni" = "false"' ${CSV}
+	$(YQ) -i '.metadata.annotations."features.operators.openshift.io/csi" = "false"' ${CSV}
 
 
 ##@ Build
